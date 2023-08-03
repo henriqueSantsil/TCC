@@ -1,6 +1,6 @@
 //conn.js
 const { Sequelize } = require('sequelize')
-
+                                                        //user e senha diferente
 const sequelize = new Sequelize('radar_da_informacao', 'root', 'sucesso', { //alterar o nome do banco, user e senha.
     host: 'localhost',
     dialect: 'mysql'
