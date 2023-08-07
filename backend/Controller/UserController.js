@@ -136,7 +136,6 @@ module.exports = class UserController{
         const id = req.params.id
         
         //checando se o o user existe
-
         const token = getToken(req)
         const user = await getUserById(token)
         const {name, email, phone, password, confirmpassword} = req.body
@@ -179,7 +178,7 @@ module.exports = class UserController{
             return
         }else if(password === confirmpassword != null){
             //criando nova senha
-            const salt = await bcrypt.gentSalt(12)
+            const salt = await bcrypt.genSalt(12)
             const passwordHash = await bcrypt.hash(password, salt)
             user.password = passwordHash
         }
@@ -198,7 +197,7 @@ module.exports = class UserController{
 
         if(password === confirmpassword != null){
             //criando nova senha
-            const salt = await bcrypt.gentSalt(12)
+            const salt = await bcrypt.genSalt(12)
             const passwordHash = await bcrypt.hash(password, salt)
             user.password = passwordHash
         }
