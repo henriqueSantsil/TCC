@@ -1,6 +1,6 @@
 //Model/News.Js
 const { DataTypes } = require('sequelize')
-const User = require('./User')
+const User = require('../Model/User')
 const db = require('../db/conn')
 
 const News = db.define('News', {

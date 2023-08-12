@@ -1,14 +1,15 @@
-//Helpers/get-user-by-token.js
-const jwt = require ('jsonwebtoken')
-//tratamento do token
+//get-user-by-token.js
+const jwt = require('jsonwebtoken')//jwt ele gerencia o token
 
 const User = require('../Model/User')
 
-//buscar usuario com o JWT
-async function  getUserByToken (token){
-    if(!token){
-        return res.status(401).json({message: "Acesso negado"})
+//pegar usuario com o token
+
+async function getUserByToken(token, res) {
+    if (!token) {
+        return res.status(401).json({ message: 'Acesso negado' })
     }
+
     const decoded = jwt.verify(token, 'nossosecret')
 
     const userId = decoded.id
@@ -17,5 +18,4 @@ async function  getUserByToken (token){
 
     return user
 }
-
 module.exports = getUserByToken

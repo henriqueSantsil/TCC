@@ -1,19 +1,20 @@
-//model/ImagePet.js
+//model/ImageNews.js
 const { DataTypes } = require('sequelize')
 
 const db = require('../db/conn')
 
 const News = require('./News')
 
-const ImageNews = db.define('imageNews', {
-    Image:{
+const ImageNews = db.define('ImageNews', {
+    image:{
         type: DataTypes.STRING,
         allowNull: false
     }
 })
 
-//uma imagem pertence a 1 noticia e uma noticia pode ter varias imagens
+//a imagem pertence a 1 noticia
 ImageNews.belongsTo(News)
+//uma noticia tem varias imagens
 News.hasMany(ImageNews)
 
 module.exports = ImageNews

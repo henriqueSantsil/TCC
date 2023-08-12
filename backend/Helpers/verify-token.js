@@ -1,16 +1,18 @@
-//Helpers/verify-token.js
-const jwt = require ('jsonwebtoken')
-const getToken = require ('./get-token')
+//verify-token.js
+const jwt = require('jsonwebtoken')
 
-function checkToken(req, res, next){
-    if(!req.headers.authorization){
-        return res.status(401).json({message: 'Acesso negado'})
+const getToken = require('./get-token')
+
+function checkToken(req, res, next) {
+
+    if (!req.headers.authorization) {
+        return res.status(401).json({ message: 'Acesso Negado' })
     }
 
     const token = getToken(req)
 
-    if(!token){
-        return res.status(401).json({message: "Acesso negado"})
+    if (!token) {
+        return res.status(401).json({ message: 'Acesso Negado' })
     }
 
     try {
@@ -18,8 +20,8 @@ function checkToken(req, res, next){
         req.user = verified
         next()
     } catch (error) {
-        return res.status(400).json({message: "Token invalido"})
+        return res.status(400).json({ message: 'Token Invalido' })
     }
-}
 
+}
 module.exports = checkToken
