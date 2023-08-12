@@ -20,8 +20,16 @@ module.exports = class UserController {
             res.status(422).json({ message: 'O email é obrigatório' })
             return
         }
+        if(!email.includes("@")){
+            res.status(422).json({ message: 'O email inserido é invalido' })
+            return
+        }
         if (!password) {
             res.status(422).json({ message: 'O password é obrigatório' })
+            return
+        }
+        if (password.length <= 3 ) {
+            res.status(422).json({ message: 'O password deve conter mais de 4 caracteres' })
             return
         }
         if (!confirmpassword) {
