@@ -43,6 +43,10 @@ module.exports = class UserController {
 
         //criar a senha
         //criar a criptografia
+        if (password !== confirmpassword) {
+            res.status(422).json({ message: 'as senhas não batem' })
+            return
+        }
         const salt = await bcrypt.genSalt(12)
         const passwordHash = await bcrypt.hash(password, salt)
 
