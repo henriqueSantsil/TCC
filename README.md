@@ -57,4 +57,4 @@ A rotas estão divididas em User e News (para usuário e noticia):
 
   ### `npm init`
 
-  ### `npm install react-router-dom react-scripts axios bootstrap`
+  ### `npm install react-router-dom react-scripts axios bootstrap react-toastify`

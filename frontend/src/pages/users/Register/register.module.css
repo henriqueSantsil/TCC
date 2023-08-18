@@ -1,0 +1,17 @@
+.backgroundImage{
+    background-image: url('../../../components/images/background.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+
+};
+
+@media (min-width: 1016px) {
+    .responsive {
+      width: 1200px;
+    }
+  }
