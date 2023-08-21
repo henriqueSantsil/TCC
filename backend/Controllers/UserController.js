@@ -20,7 +20,7 @@ module.exports = class UserController {
             res.status(422).json({ message: 'O email é obrigatório' })
             return
         }
-        if(!email.includes("@")){
+        if (!email.includes("@")) {
             res.status(422).json({ message: 'O email inserido é invalido' })
             return
         }
@@ -28,7 +28,7 @@ module.exports = class UserController {
             res.status(422).json({ message: 'O password é obrigatório' })
             return
         }
-        if (password.length <= 3 ) {
+        if (password.length <= 3) {
             res.status(422).json({ message: 'O password deve conter mais de 4 caracteres' })
             return
         }
@@ -149,7 +149,7 @@ module.exports = class UserController {
         const user = await getUserById(token)
 
         //receber os dados nas variaves
-        const { name, email, phone, password, confirmpassword } = req.body
+        const { name, email, phone, bio, password, confirmpassword } = req.body
 
         //recebendo imagem do usuario
         let image = ''
@@ -172,21 +172,30 @@ module.exports = class UserController {
             return
         }
         if (!phone) {
-            res.status(422).json({ message: 'O phone é obrigatório' })
+            res.status(422).json({ message: 'O telefone é obrigatório' })
             return
         }
         user.phone = phone
 
-        if (password !== confirmpassword) {
-            res.status(422).json({ message: 'as senhas não batem' })
+        if (!password || !confirmpassword) {
+            res.status(422).json({ message: 'as senhas não podem ser vazias' })
             return
-        } else if (password === confirmpassword && password != null) {
+        }
+        if (password !== confirmpassword) {
+            res.status(422).json({ message: 'as senhas não coincidem' })
+            return
+        } else if (password.length !== 0 && confirmpassword.length !== 0 && password == confirmpassword) {
             //criptografando senha
             const salt = await bcrypt.genSalt(12)
             const passwordHash = await bcrypt.hash(password, salt)
 
             user.password = passwordHash
+            
         }
+        // else{
+        //     res.status(422).json({ message: 'as senhas não podem ser vazias' })
+        //     return
+        // }
 
         const userToUpdate = await User.findByPk(id)
 
@@ -199,6 +208,7 @@ module.exports = class UserController {
         userToUpdate.email = email
         userToUpdate.phone = phone
         userToUpdate.image = image
+        userToUpdate.bio = bio
 
         if (password === confirmpassword && password != null) {
             //criptografando senha
