@@ -12,6 +12,6 @@ router.get('/checkuser', UserController.checkUser)
 router.get('/:id', UserController.getUserById)
 
 //rotas protegidas, só acessar caso esteja logado!!!
-router.patch('/profile/:id', verifyToken, imageUpload.single('image'), UserController.editUser)
+router.patch('/settings/:id', verifyToken, imageUpload.single('image'), UserController.editUser)
 
 module.exports = router
