@@ -34,7 +34,7 @@ function Register() {
     register(user);
   }
 
-  const notify = () => toast("Cadastro realizado com sucesso");
+
 
 
   return ( <>
@@ -120,8 +120,7 @@ function Register() {
             </div>
             </div>
 
-            <button className='btn btn-success'
-          onClick={notify}>Registrar
+            <button className='btn btn-success'>Registrar
         </button>
         <ToastContainer />
 

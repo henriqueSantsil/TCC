@@ -1,6 +1,8 @@
 import api from '../utils/api'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function useAuth() {
     //useState() é um hook para alterar o estado de algo
@@ -30,11 +32,19 @@ function useAuth() {
                 .then((response) => {
                     return response.data
                 })
-            alert(data.message)
+            const notify = () => toast.success("Registro realizado com sucesso!", {
+                theme: "dark"
+            });
+            notify()
             await authUser(data)
         } catch (error) {
+            let message = error.response.data.message
             console.log('Erro ao cadastrar ', error)
-            alert(error.response.data.message)
+            const notify = (error) => toast.warn(message, {
+                theme: "dark"
+            });
+            notify()
+            
         }
     }
 
@@ -44,11 +54,19 @@ function useAuth() {
                 .then((response) => {
                     return response.data
                 })
-            alert(data.message)
+            const notify = () => toast.success(data.message, {
+                theme: "dark"
+            });
+            notify()
             await authUser(data)
             navigate('user/profile')
         } catch (error) {
-            alert(error.response.data.message)
+            let message = error.response.data.message
+            console.log('Error ao fazer login', error)
+            const notify = () => toast.warn(message, {
+                theme: "dark"
+            });
+            notify()
         }
     }
 
@@ -57,7 +75,10 @@ function useAuth() {
         localStorage.removeItem('token')
         api.defaults.headers.Authorization = undefined
         navigate('/')
-        alert('Logout realizado com sucesso')
+        const notify = () => toast.success("Logout realizado com sucesso!", {
+            theme: "dark"
+        });
+        notify()
     }
 
     return { authenticated, register, login, logout }
