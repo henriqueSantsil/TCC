@@ -20,7 +20,7 @@ module.exports = class UserController {
             res.status(422).json({ message: 'O email é obrigatório' })
             return
         }
-        if(!email.includes("@")){
+        if (!email.includes("@")) {
             res.status(422).json({ message: 'O email inserido é invalido' })
             return
         }
@@ -28,7 +28,7 @@ module.exports = class UserController {
             res.status(422).json({ message: 'O password é obrigatório' })
             return
         }
-        if (password.length <= 3 ) {
+        if (password.length <= 3) {
             res.status(422).json({ message: 'O password deve conter mais de 4 caracteres' })
             return
         }
@@ -176,10 +176,12 @@ module.exports = class UserController {
             return
         }
         user.phone = phone
-        if(!password || !confirmpassword){
+
+        if (!password || !confirmpassword) {
             res.status(422).json({ message: 'as senhas não podem ser vazias' })
             return
         }
+
         if (password !== confirmpassword) {
             res.status(422).json({ message: 'as senhas não coincidem' })
             return //password.length > 0 && confirmpassword.length > 0 && password == confirmpassword
@@ -189,8 +191,8 @@ module.exports = class UserController {
             const passwordHash = await bcrypt.hash(password, salt)
 
             user.password = passwordHash
-           
         }
+        
 
         const userToUpdate = await User.findByPk(id)
 

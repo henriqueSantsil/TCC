@@ -40,7 +40,7 @@ function useAuth() {
         } catch (error) {
             let message = error.response.data.message
             console.log('Erro ao cadastrar ', error)
-            const notify = (error) => toast.warn(message, {
+            const notify = () => toast.warn(message, {
                 theme: "dark"
             });
             notify()
@@ -59,7 +59,7 @@ function useAuth() {
             });
             notify()
             await authUser(data)
-            navigate('user/profile')
+            navigate('users/profile')
         } catch (error) {
             let message = error.response.data.message
             console.log('Error ao fazer login', error)
