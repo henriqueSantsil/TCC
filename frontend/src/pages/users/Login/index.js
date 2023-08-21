@@ -26,9 +26,7 @@ function Login() {
     login(user)
   }
 
-  const notify = () => {
-    toast ('Login realizado com sucesso!')
-  }
+ 
   
   return (<>
     <section class="text-center text-lg-start rounded-start-2">
@@ -71,7 +69,7 @@ function Login() {
             </div>
             </div>
             <button className='btn btn-success'
-          onClick={notify}>Login
+          >Login
         </button>
         <ToastContainer />
 
