@@ -181,21 +181,18 @@ module.exports = class UserController {
             res.status(422).json({ message: 'as senhas não podem ser vazias' })
             return
         }
+
         if (password !== confirmpassword) {
             res.status(422).json({ message: 'as senhas não coincidem' })
-            return
-        } else if (password.length !== 0 && confirmpassword.length !== 0 && password == confirmpassword) {
+            return //password.length > 0 && confirmpassword.length > 0 && password == confirmpassword
+        } else if (password.length != 0 && confirmpassword.length != 0 && password == confirmpassword) {
             //criptografando senha
             const salt = await bcrypt.genSalt(12)
             const passwordHash = await bcrypt.hash(password, salt)
 
             user.password = passwordHash
-            
         }
-        // else{
-        //     res.status(422).json({ message: 'as senhas não podem ser vazias' })
-        //     return
-        // }
+        
 
         const userToUpdate = await User.findByPk(id)
 
