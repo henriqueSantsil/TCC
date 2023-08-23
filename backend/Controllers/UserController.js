@@ -153,9 +153,10 @@ module.exports = class UserController {
             const currentTime = new Date();
             const lastUpdateTime = new Date(user.lastUpdate);
             const timeDifferenceMinutes = (currentTime - lastUpdateTime) / (1000 * 60);
-            
-            if (timeDifferenceMinutes < 30) {
-                res.status(422).json({ message: 'Você só pode atualizar suas informações a cada 30 minutos.' });
+            const remainingTime = 30 - timeDifferenceMinutes; // Tempo restante em minutos
+        
+            if (remainingTime > 0) {
+                res.status(422).json({ message: `Você só pode atualizar suas informações novamente em ${remainingTime.toFixed(0)} minutos.` });
                 return;
             }
         }
