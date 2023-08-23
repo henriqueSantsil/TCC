@@ -148,6 +148,18 @@ module.exports = class UserController {
         const token = getToken(req)
         const user = await getUserById(token)
 
+        // Verificar se já se passaram 30 minutos desde a última atualização
+        if (user.lastUpdate) {
+            const currentTime = new Date();
+            const lastUpdateTime = new Date(user.lastUpdate);
+            const timeDifferenceMinutes = (currentTime - lastUpdateTime) / (1000 * 60);
+            
+            if (timeDifferenceMinutes < 30) {
+                res.status(422).json({ message: 'Você só pode atualizar suas informações a cada 30 minutos.' });
+                return;
+            }
+        }
+
         //receber os dados nas variaves
         const { name, email, phone, bio, password, confirmpassword } = req.body
 
@@ -164,11 +176,6 @@ module.exports = class UserController {
         }
         if (!email) {
             res.status(422).json({ message: 'O email é obrigatório' })
-            return
-        }
-        const userExists = await User.findOne({ where: { email: email } })
-        if (user.email !== email && userExists) {
-            res.status(422).json({ message: 'Por favor utilize outro email' })
             return
         }
         if (!phone) {
@@ -216,6 +223,7 @@ module.exports = class UserController {
         }
 
         try {
+            user.lastUpdate = new Date()
             await userToUpdate.save()
             res.status(200).json({ message: 'usuario atualizado com sucesso' })
         } catch (error) {
