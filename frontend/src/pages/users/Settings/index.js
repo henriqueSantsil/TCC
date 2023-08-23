@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Style from '../Settings/settings.module.css'
 
+
 function Settings() {
     //Aqui vamos digitar a logica do perfil
     const [user, setUser] = useState({})
@@ -80,12 +81,15 @@ function Settings() {
 
     }
     
-    
-    
     return (
-        <div>
+        <div class="container">
+            
+            <div className="row justify-content-center mt-3">
+            <div className="col-auto"> 
             <label htmlFor="profileImageInput">
-            <img
+            
+            <img 
+            class="rounded-circle"
               style={{ height: '200px', width: '200px', cursor: 'pointer' }}
               src={
                 preview || 
@@ -96,7 +100,11 @@ function Settings() {
               alt='Click to change profile picture'
             />
         </label>
-        
+        <h2 className=" row mt-3 justify-content-center">Olá {user.name} </h2>
+            </div>  
+        </div>
+
+        <div className="container mt-5">
         {/* Invisible file input */}
         <input 
             id="profileImageInput"
@@ -105,57 +113,84 @@ function Settings() {
             onChange={onFileChange}
             style={{ display: 'none' }}
         />
-            
-            <form onSubmit={handleSubmit}>
-                <InputGroup
-                    type='text'
-                    label='Nome'
-                    name='name'
-                    placeholder='Digite seu nome'
-                    handleChange={handleChange}
-                    value={user.name}
-                />
-                <InputGroup
-                    type='email'
-                    label='email'
-                    name='email'
-                    placeholder='Digite seu email'
-                    handleChange={handleChange}
-                    value={user.email}
-                />
-                <InputGroup
-                    type='phone'
-                    label='phone'
-                    name='phone'
-                    placeholder='Digite seu phone'
-                    handleChange={handleChange}
-                    value={user.phone}
-                />
-                <InputGroup
-                    type='text'
-                    label='bio'
-                    name='bio'
-                    placeholder='Insira sua bio'
-                    handleChange={handleChange}
-                />
-                <InputGroup
-                    type='password'
-                    label='password'
-                    name='password'
-                    placeholder='Digite seu password'
-                    handleChange={handleChange}
-                />
-                <InputGroup
-                    type='password'
-                    label='password'
-                    name='confirmpassword'
-                    placeholder='Digite seu password'
-                    handleChange={handleChange}
-                   
-                />
-                <button type='submit'>Atualizar</button>
-            </form>
+        <form onSubmit={handleSubmit}>
+        
+
+        <div className="container mt-5">
+
+    {/* Primeiro Bloco: Nome e Bio */}
+    <div className="card mb-4">
+        <div className="card-header">
+            Informações Públicas
         </div>
+        <div className="card-body">
+            <InputGroup
+                type='text'
+                label={<i className="zmdi zmdi-account"></i>}
+                name='name'
+                placeholder='Digite seu nome'
+                handleChange={handleChange}
+                value={user.name}
+            />
+            <InputGroup
+                type='textarea'
+                label={<i className="zmdi zmdi-comment-text"></i>}
+                name='bio'
+                placeholder='Insira sua bio'
+                handleChange={handleChange}
+                value={user.bio}
+            />
+        </div>
+    </div>
+
+    {/* Segundo Bloco: Informações Privadas */}
+    <div className="card">
+        <div className="card-header">
+            Informações Privadas
+        </div>
+        <div className="card-body">
+            <InputGroup
+                type='email'
+                label={<i className="zmdi zmdi-email"></i>}
+                name='email'
+                placeholder='Digite seu email'
+                handleChange={handleChange}
+                value={user.email}
+            />
+            <InputGroup
+                type='tel'
+                label={<i className="zmdi zmdi-phone"></i>}
+                name='phone'
+                placeholder='Digite seu telefone'
+                handleChange={handleChange}
+                value={user.phone}
+            />
+            <InputGroup
+                type='password'
+                label={<i className="zmdi zmdi-key"></i>}
+                name='password'
+                placeholder='Digite sua senha'
+                handleChange={handleChange}
+                value={user.password}
+            />
+            <InputGroup
+                type='password'
+                label={<i className="zmdi zmdi-key"></i>}
+                name='confirmpassword'
+                placeholder='Confirme sua senha'
+                handleChange={handleChange}
+                value={user.confirmpassword}
+            />
+        </div>
+    </div>
+
+    <div className="d-grid gap-2 col-6 mx-auto mt-4">
+        <button type='submit' className="btn btn-outline-primary">Atualizar</button>
+    </div>
+</div>
+    </form>
+    </div>
+    </div>
     )
 }
 
