@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import InputGroup from '../../../components/InputGroup'
 import api from '../../../utils/api'
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import InputGroupCKEditor from '../../../components/InputGroupCkEditor';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 function AddNews() {
     const [news, setNews] = useState({})
@@ -38,56 +43,89 @@ function AddNews() {
                 'Content-Type': 'multipart/form-data'
             }
         }).then((response) => {
+            const notify = () => toast.success("Noticia cadastrada com sucesso!", {
+                theme: "dark"
+            });
+            notify()
             return response.data
         }).catch((err) => {
-            alert(err.response.data)
-            return err.response.data
+            let message = err.response.data.message
+            const notify = () => toast.warn(message, {
+                theme: "dark"
+            });
+            notify()
+            return err.response.data.message
         })
-        alert(data.message)
+        
     }
 
-    return (
-        <section>
-            <div>
-                <h3>Crie sua noticia</h3>
-                <p>Depois ficará disponivel para lerem</p>
-            </div>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <InputGroup
-                        type='file'
-                        label='Imagem'
-                        placeholder='Coloque a foto da noticia'
-                        name='images'
-                        handleChange={onFileChange}
-                    />
-                    <InputGroup
-                        type='text'
-                        label='Titulo da noticia'
-                        placeholder='Digite o titulo da noticia'
-                        name='name'
-                        handleChange={handleChange}
-                    />
-                    <InputGroup
-                        type='textarea'
-                        label='Caption'
-                        placeholder='Digite a descrição da noticia'
-                        name='caption'
-                        handleChange={handleChange}
-                    />
-                    <InputGroup
-                        type='textarea'
-                        label='news'
-                        placeholder='Digite a noticia'
-                        name='news'
-                        handleChange={handleChange}
-                    />
-                    
-                    <button type='submit'>Cadastrar noticia</button>
-                </form>
-            </div>
-        </section>
-    )
-}
 
-export default AddNews
+        return (
+           <>
+            <div className="row justify-content-center mt-3">
+                <div className="col-auto">
+                    <label htmlFor="newsImageInput">
+
+                        <img
+
+                            style={{ height: '200px', width: '200px', cursor: 'pointer' }}
+                            src={preview ||
+                                (news.image
+                                    ? 'http://localhost:5000/images/news/' + news.image
+                                    : 'https://i.pinimg.com/originals/a0/4d/84/a04d849cf591c2f980548b982f461401.jpg') // Your placeholder image URL
+                            }
+                            alt='Click to change profile picture' />
+                    </label>
+
+                </div>
+            </div><div className="container mt-5">
+
+                    <input
+                        id="newsImageInput"
+                        type="file"
+                        name="image"
+                        onChange={onFileChange}
+                        style={{ display: 'none' }} />
+
+                    <form onSubmit={handleSubmit}>
+
+
+
+                        {/* Bloco: Detalhes da Notícia */}
+                        <div className="card">
+                            <div className="card-header">
+                                <strong>Detalhes da Notícia</strong>
+                            </div>
+                            <div className="card-body bg-light">
+                                <InputGroup
+                                    type='text'
+                                    label='Titulo da noticia'
+                                    placeholder='Digite o titulo da noticia'
+                                    name='title'
+                                    handleChange={handleChange} />
+                                <InputGroup
+                                    type='textarea'
+                                    label='Caption'
+                                    placeholder='Digite a descrição da noticia'
+                                    name='caption'
+                                    handleChange={handleChange} />
+                                <InputGroupCKEditor
+                                    label="Notícia"
+                                    placeholder="Escreva sua noticia"
+                                    name="article"
+                                    handleChange={handleChange}
+                                    value={news.article} />
+                            </div>
+                        </div>
+
+                        {/* Botão para submissão */}
+                        <div className="d-grid gap-2 col-6 mx-auto mt-4">
+                            <button type='submit' className="btn btn-outline-primary">Cadastrar noticia</button>
+                        </div>
+                    </form>
+                </div>
+        
+            </>
+        )
+        }
+export default AddNews;

@@ -1,5 +1,8 @@
 function InputGroup({label, placeholder, type, name, handleChange, value}) {
-  if (type === 'textarea') {
+    
+  
+  
+    if (type === 'textareaBio') {
     return (
         <div className='mb-3 input-group'>
             <label className='input-group-text'>{label}</label>

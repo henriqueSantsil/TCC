@@ -136,7 +136,7 @@ function Settings() {
                                         value={user.name}
                                     />
                                     <InputGroup
-                                        type='textarea'
+                                        type='textareaBio'
                                         label={<i className="zmdi zmdi-comment-text"></i>}
                                         name='bio'
                                         placeholder='Insira sua bio'
