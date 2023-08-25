@@ -19,7 +19,7 @@ const User = db.define('User', {
         allowNull: true
     },
     bio: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true
     },
     phone: {

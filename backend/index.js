@@ -19,7 +19,7 @@ app.use('/news', NewsRoutes)
 conn
     .sync()
     .then(() => {
-        app.listen(5817)
+        app.listen(5896)
     })
     .catch((error) => console.log(error))
 
