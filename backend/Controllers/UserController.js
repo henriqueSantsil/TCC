@@ -20,7 +20,7 @@ module.exports = class UserController {
             res.status(422).json({ message: 'O email é obrigatório' })
             return
         }
-        if(!email.includes("@")){
+        if (!email.includes("@")) {
             res.status(422).json({ message: 'O email inserido é invalido' })
             return
         }
@@ -28,7 +28,7 @@ module.exports = class UserController {
             res.status(422).json({ message: 'O password é obrigatório' })
             return
         }
-        if (password.length <= 3 ) {
+        if (password.length <= 3) {
             res.status(422).json({ message: 'O password deve conter mais de 4 caracteres' })
             return
         }
@@ -43,6 +43,10 @@ module.exports = class UserController {
 
         //criar a senha
         //criar a criptografia
+        if (password !== confirmpassword) {
+            res.status(422).json({ message: 'as senhas não batem' })
+            return
+        }
         const salt = await bcrypt.genSalt(12)
         const passwordHash = await bcrypt.hash(password, salt)
 
@@ -144,8 +148,21 @@ module.exports = class UserController {
         const token = getToken(req)
         const user = await getUserById(token)
 
+        // Verificar se já se passaram 30 minutos desde a última atualização
+        if (user.lastUpdate) {
+            const currentTime = new Date();
+            const lastUpdateTime = new Date(user.lastUpdate);
+            const timeDifferenceMinutes = (currentTime - lastUpdateTime) / (1000 * 60);
+            const remainingTime = 30 - timeDifferenceMinutes; // Tempo restante em minutos
+        
+            if (remainingTime > 0) {
+                res.status(422).json({ message: `Você só pode atualizar suas informações novamente em ${remainingTime.toFixed(0)} minutos.` });
+                return;
+            }
+        }
+
         //receber os dados nas variaves
-        const { name, email, phone, password, confirmpassword } = req.body
+        const { name, email, phone, bio, password, confirmpassword } = req.body
 
         //recebendo imagem do usuario
         let image = ''
@@ -162,27 +179,28 @@ module.exports = class UserController {
             res.status(422).json({ message: 'O email é obrigatório' })
             return
         }
-        const userExists = await User.findOne({ where: { email: email } })
-        if (user.email !== email && userExists) {
-            res.status(422).json({ message: 'Por favor utilize outro email' })
-            return
-        }
         if (!phone) {
-            res.status(422).json({ message: 'O phone é obrigatório' })
+            res.status(422).json({ message: 'O telefone é obrigatório' })
             return
         }
         user.phone = phone
 
-        if (password !== confirmpassword) {
-            res.status(422).json({ message: 'as senhas não batem' })
+        if (!password || !confirmpassword) {
+            res.status(422).json({ message: 'as senhas não podem ser vazias' })
             return
-        } else if (password === confirmpassword && password != null) {
+        }
+
+        if (password !== confirmpassword) {
+            res.status(422).json({ message: 'as senhas não coincidem' })
+            return //password.length > 0 && confirmpassword.length > 0 && password == confirmpassword
+        } else if (password.length != 0 && confirmpassword.length != 0 && password == confirmpassword) {
             //criptografando senha
             const salt = await bcrypt.genSalt(12)
             const passwordHash = await bcrypt.hash(password, salt)
 
             user.password = passwordHash
         }
+        
 
         const userToUpdate = await User.findByPk(id)
 
@@ -195,6 +213,7 @@ module.exports = class UserController {
         userToUpdate.email = email
         userToUpdate.phone = phone
         userToUpdate.image = image
+        userToUpdate.bio = bio
 
         if (password === confirmpassword && password != null) {
             //criptografando senha
@@ -205,6 +224,7 @@ module.exports = class UserController {
         }
 
         try {
+            user.lastUpdate = new Date()
             await userToUpdate.save()
             res.status(200).json({ message: 'usuario atualizado com sucesso' })
         } catch (error) {

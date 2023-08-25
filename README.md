@@ -1,9 +1,9 @@
 # TCC
   Trabalho de conclusão de curso: "radar da informação" um website onde jornalistas recém-formados podem postar suas notícias e serem reconhecidos.
 
-## Instalação:
+## Back-end Instalação:
 
-  Para a instalação correta das dependências do projeto (os pacotes necessários), é preciso rodar os respectivos comandos no console:
+  Para a instalação correta das dependências do projeto, no backend(os pacotes necessários), é preciso rodar os respectivos comandos no console na pasta /backend:
 
   ### `npm init`
 
@@ -48,3 +48,13 @@ A rotas estão divididas em User e News (para usuário e noticia):
   `/` -> rota do tipo **GET** e **publica** para listagem de todas as notícias;
 
   `/:id` rota que pode assumir o tipo **GET** e **publica** para listar uma notícia pelo id;
+
+
+
+## Front-end instalação:
+
+  Para a instalação correta das dependências do projeto, no frontend(os pacotes necessários), é preciso rodar os respectivos comandos no console na pasta /frontend:
+
+  ### `npm init`
+
+  ### `npm install react-router-dom react-scripts axios bootstrap react-toastify`

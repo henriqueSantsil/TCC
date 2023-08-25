@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 //Contexto
 import { Context } from '../../context/UserContext'
 
+
 function NavBar() {
     const { authenticated, logout } = useContext(Context)
 
@@ -13,7 +14,6 @@ function NavBar() {
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
                         {!authenticated ? (
                             <>
                                 <li className="nav-item"><Link className="nav-link" to="/register">Registrar</Link></li>
@@ -21,14 +21,14 @@ function NavBar() {
                             </>
                         ) : (
                             <>
-                                <li className="nav-item"><Link className="nav-link" to="/user/profile">Perfil</Link></li>
                                 <li className="nav-item"><Link className="nav-link" to="/news/create">Cadastrar notícia</Link></li>
-                                <li className="nav-item"><Link className="nav-link" to="/news/mynews">Minhas notícias</Link></li>
-                                <li onClick={logout} className="nav-item"><Link className="nav-link" to='/'>Sair</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="/news/mynews">Perfil</Link></li>
+                                <li onClick={logout} className="nav-item"><Link className="nav-link" to='/'>SAIR</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="/users/settings"><i class="zmdi zmdi-settings"></i></Link></li>
                             </>
 
                         )}
-                        
+                        <li className="nav-item"><Link className="nav-link" to="/"><i class="zmdi zmdi-home"></i></Link></li>
                     </ul>
                 </div>
             </div>

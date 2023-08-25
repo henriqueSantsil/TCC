@@ -1,11 +1,7 @@
 //conn.js
 require('dotenv').config()
 const { Sequelize } = require('sequelize')
-                                                        //user e senha diferente
-// const sequelize = new Sequelize('railway', 'root', 'RIDEuXQHbCxsgaX7PHiN', { //alterar o nome do banco, user e senha.
-//     host: 'containers-us-west-99.railway.app',
-//     dialect: 'mysql'
-// })
+                                                        
 
 const sequelize = new Sequelize({
     username: process.env.DB_USERNAME,

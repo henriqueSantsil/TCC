@@ -18,9 +18,21 @@ const User = db.define('User', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    bio: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     phone: {
         type: DataTypes.STRING,
         allowNull: false
     },
+    lastUpdate: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
 })
+
+User.addHook('beforeUpdate', (user, options) => {
+    user.lastUpdate = new Date();
+  })
 module.exports = User
