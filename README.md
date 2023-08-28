@@ -33,7 +33,9 @@ A rotas estão divididas em User e News (para usuário e noticia):
 
   `/:id` -> rota do tipo **GET** e **publica** para buscar um usuário pelo id;
 
-  `/edit/:id` rota do tipo **PATCH** e **privada** para editar um usuário, requer: name, email, phone, password, confirmpassword;
+  `/settings/:id` rota do tipo **PATCH** e **privada** para editar um usuário, requer: name, email, phone, password, confirmpassword;
+
+  `/profile/:id` rota do tipo **GET** e **privada** para exibir as noticias do usuario logado;
 
   ## Rotas das notícias:
 
