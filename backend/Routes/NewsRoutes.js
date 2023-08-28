@@ -10,7 +10,7 @@ const imageUpload = require('../helpers/image-upload')
 /*cadastrar uma noticia*/
 router.post('/create', verifyToken, imageUpload.array('images'), NewsController.create)
 /* mostrar noticias do usuario logado */
-router.get('/mynews', verifyToken, NewsController.getAllUserNews)
+// router.get('/profile', verifyToken, NewsController.getAllUserNews)
 /* deletar uma noticia pelo id */
 router.delete('/:id', verifyToken, NewsController.removeNewsById)
 /* Editar noticia */

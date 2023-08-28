@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Container from "./components/Container";
 import AddNews from "./pages/news/create"
+import Profile from "./pages/users/Profile";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/users/settings" element={<Settings />} />
             <Route exact path="/news/create" element={<AddNews />} />
+            <Route exact path="/users/profile" element={<Profile />} />
           </Routes>
           </Container>
         </UserProvider>
