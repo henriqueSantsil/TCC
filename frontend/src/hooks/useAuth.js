@@ -43,8 +43,7 @@ function useAuth() {
             const notify = () => toast.warn(message, {
                 theme: "dark"
             });
-            notify()
-            
+            notify()   
         }
     }
 

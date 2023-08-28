@@ -22,7 +22,7 @@ function NavBar() {
                         ) : (
                             <>
                                 <li className="nav-item"><Link className="nav-link" to="/news/create">Cadastrar notícia</Link></li>
-                                <li className="nav-item"><Link className="nav-link" to="/news/mynews">Perfil</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="/users/profile">Perfil</Link></li>
                                 <li onClick={logout} className="nav-item"><Link className="nav-link" to='/'>SAIR</Link></li>
                                 <li className="nav-item"><Link className="nav-link" to="/users/settings"><i class="zmdi zmdi-settings"></i></Link></li>
                             </>
