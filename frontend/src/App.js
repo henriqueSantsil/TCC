@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Container from "./components/Container";
 import AddNews from "./pages/news/create"
 import Profile from "./pages/users/Profile";
+import NewsDetails from "./pages/news/details";
+import UpdateNews from "./pages/news/Update";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             <Route exact path="/users/settings" element={<Settings />} />
             <Route exact path="/news/create" element={<AddNews />} />
             <Route exact path="/users/profile" element={<Profile />} />
+            <Route exact path="/news/details/:id" element={<NewsDetails/>} />
+            <Route exact path="/news/update/:id" element={<UpdateNews />} />
           </Routes>
           </Container>
         </UserProvider>

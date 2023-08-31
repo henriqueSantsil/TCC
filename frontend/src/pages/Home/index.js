@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../utils/api';
 import styles from './Home.module.css';
 import Pagination from '../../components/Pagination'; // Import the Pagination component
+import { Link } from 'react-router-dom'
 
 function Home() {
     const [news, setNews] = useState([]);
@@ -38,10 +39,11 @@ function Home() {
                             />
                             <figcaption className={styles.cardBody}>
                                 <h3 className={styles.cardTitle}>{newsItem.title}</h3>
-                                <p className={styles.cardText}>
-                                    <span>Caption:</span> {newsItem.caption}
-                                </p>
-                                <div dangerouslySetInnerHTML={{ __html: newsItem.article }} />
+                                <p className={styles.cardText}><span>Subtitulo:</span> {newsItem.caption}</p>
+                                <div dangerouslySetInnerHTML={{ __html: newsItem.article.slice(0, 155) }} />
+                                {newsItem.article.length > 155 && 
+                                    <Link to={`/news/details/${newsItem.id}`}>... Leia mais</Link>
+                                }
                             </figcaption>
                         </figure>
                     ))

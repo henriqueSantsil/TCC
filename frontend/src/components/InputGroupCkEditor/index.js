@@ -9,7 +9,7 @@ function InputGroupCKEditor({ label, placeholder, name, handleChange, value }) {
             <label className='input-group-text'>{label}</label>
             <CKEditor
                 editor={ClassicEditor}
-                data={value || placeholder}
+                data={value }
                 onChange={(event, editor) => {
                     const data = editor.getData();
                     handleChange({
