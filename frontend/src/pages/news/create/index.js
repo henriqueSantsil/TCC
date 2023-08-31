@@ -105,13 +105,12 @@ function AddNews() {
                                     handleChange={handleChange} />
                                 <InputGroup
                                     type='textarea'
-                                    label='Caption'
+                                    label='Subtitulo'
                                     placeholder='Digite a descrição da noticia'
                                     name='caption'
                                     handleChange={handleChange} />
                                 <InputGroupCKEditor
                                     label="Notícia"
-                                    placeholder="Escreva sua noticia"
                                     name="article"
                                     handleChange={handleChange}
                                     value={news.article} />

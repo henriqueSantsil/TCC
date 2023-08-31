@@ -1,6 +1,6 @@
 .backgroundImage{
     background-image: url('../../../components/images/background.jpg');
-    background-size: cover;
+    background-size: contain;
     background-attachment: fixed;
     margin: 0;
     display: flex;

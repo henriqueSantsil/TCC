@@ -4,15 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './Profile.module.css';
-import Pagination from '../../../components/Pagination' // Ensure you've imported the Pagination component
+import Pagination from '../../../components/Pagination' 
+import { Link } from 'react-router-dom'
 
 function Profile() {
     const [user, setUser] = useState({});
-    const [userNews, setUserNews] = useState([]);
+    const [userNews, setUserNews, news] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 6;
     const [token, setToken] = useState(localStorage.getItem('token') || '');
     const navigate = useNavigate();
+    
 
     useEffect(() => {
         if (!token) {
@@ -51,6 +53,47 @@ function Profile() {
     // Function to change the page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+    async function removeNewsById(id) {
+        const data = await api.delete(`/news/${id}`, {
+            headers: {
+                Authorization: `Bearer ${JSON.parse(token)}`
+            }
+        }).then((response) => {
+            const updatedNews = userNews.filter((userNews) => userNews.id !== id)
+            setUserNews(updatedNews)
+            return response.data
+        }).catch((err) => {
+            return err.response.data
+        })
+
+        let message  = data.message
+        const notify = () => toast.success(message, {
+            theme: "dark"
+        });
+        notify() 
+    }
+
+    // async function updateNews(id) {
+    //     const data = await api.patch(`/news/${id}`, {
+    //         headers: {
+    //             Authorization: `Bearer ${JSON.parse(token)}`
+    //         }
+    //     }).then((response) => {
+    //         const updateNews = userNews.filter((userNews) => userNews.id !== id)
+    //         setUserNews(updateNews)
+    //         return response.data
+    //     }).catch((err) => {
+    //         return err.response.data
+    //     })
+
+    //     let message  = data.message
+    //     const notify = () => toast.success(message, {
+    //         theme: "dark"
+    //     });
+    //     notify() 
+    // }
+
+
     return (
         <div className={styles.container}>
             <ToastContainer />
@@ -88,14 +131,28 @@ function Profile() {
                             <figcaption className={styles.cardBody}>
                                 <h3 className={styles.cardTitle}>{newsItem.title}</h3>
                                 <p className={styles.cardText}>
-                                    <span>Caption:</span> {newsItem.caption}
+                                    <strong>Subtitulo:</strong> {newsItem.caption}
                                 </p>
-                                <div dangerouslySetInnerHTML={{ __html: newsItem.article }} />
+                                <div dangerouslySetInnerHTML={{ __html: newsItem.article.slice(0, 155) }} />
+                                {newsItem.article.length > 155 && 
+                                    <Link to={`/news/details/${newsItem.id}`}>... Leia mais</Link>
+                                } 
+
+                                <button
+                                
+                                    onClick={(userNews) => { removeNewsById(newsItem.id) }}
+                                    className='d-block btn btn-danger'
+                                >Excluir</button>
+                                {/* <button
+                                
+                                    onClick={(userNews) => { updateNews(newsItem.id) }}
+                                    className='d-block btn btn-danger'
+                                >Editar</button> */}
                             </figcaption>
                         </figure>
                     ))
                 ) : (
-                    <p>You haven't posted any news yet!</p>
+                    <p>Você ainda não postou nada <Link to='/news/create' >Cadastre uma agora!</Link></p>
                 )}
     
                 
@@ -109,6 +166,7 @@ function Profile() {
         </div>
     );
     
+                    
 
 }
 
