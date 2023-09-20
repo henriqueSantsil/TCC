@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import api from '../../../utils/api'
 import formatDateToBrazilianFormat from '../../../hooks/dateConvert'
+import styles from './Details.module.css';
 
 
 function NewsDetails() {
 
     const [news, userSetNews] = useState({})
     const { id } = useParams()
+    const [fontSize, setFontSize] = useState('normal');
 
     const [token] = useState(localStorage.getItem('token') || '')
 
@@ -17,13 +19,25 @@ function NewsDetails() {
         })
     }, [id])
 
+    useEffect(() => {
+        const articles = document.querySelectorAll('div > p');
+        
+        articles.forEach(p => {
+            if (fontSize === 'large') {
+                p.style.fontSize = '1.5rem';
+            } else {
+                p.style.fontSize = '1rem';  // Ou o valor padrão que você já tem
+            }
+        });
+    }, [fontSize]);
     
     const formattedDate = formatDateToBrazilianFormat(news.createdAt);
 
     return (
         <div>
             {news.title && (
-                <section>
+                <section className={styles.detalhe}>
+                    
                     <div>
                         <h3>Veja a noticia: {news.title}</h3>
                         <strong>{news.caption}</strong>
@@ -54,6 +68,10 @@ function NewsDetails() {
                             Você precisa <Link to='/register'>Criar uma conta</Link> para solicitar a visita
                         </p>
                     )}
+                    <div>
+                        <button onClick={() => setFontSize('normal')}>A-</button>
+                        <button onClick={() => setFontSize('large')}>A+</button>
+                    </div>
                 </section>
             )}
         </div>

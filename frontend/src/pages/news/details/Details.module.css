@@ -1,0 +1,71 @@
+.detalhe {
+    width: 80%;
+    max-width: 1200px; /* Por exemplo, mas ajuste conforme necessário */
+    margin: 3rem auto; /* Centraliza horizontalmente e adiciona espaçamento vertical */
+    padding: 1rem;
+    font-family: 'Georgia', serif;
+    line-height: 1.6; /* Para melhor legibilidade */
+    color: #333;
+    
+}
+
+div > h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #000;
+}
+
+div > strong {
+    display: block;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+div > p {
+    margin-bottom: 1.5rem;
+    
+}
+
+div > p2 {
+    margin-bottom: 1.5rem;
+    
+}
+
+img {
+    display: block; /* Define a imagem como um bloco */
+    max-width: 100%;
+    width: 75%; /* Garante que as imagens não estourem o tamanho do contêiner */
+    height: auto;
+    margin: 2rem auto; /* Auto nas margens esquerda e direita para centralizar a imagem */
+    border-radius: 5px; /* Opção para arredondar levemente os cantos das imagens */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidade à imagem */
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056B3;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #222;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #444;
+}
+
+button:last-child {
+    margin-right: 0;
+}
