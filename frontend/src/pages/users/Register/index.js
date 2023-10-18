@@ -73,7 +73,7 @@ function Register() {
                   <InputGroup
                     label = {<i class="zmdi zmdi-email"></i>}
                     type='email'
-                    placeholder='exemplo@hotmail.com'
+                    placeholder='exemplo@exemplo.com'
                     name='email'
                     handleChange={handleChange}
                    />

@@ -36,7 +36,7 @@ function NewsDetails() {
     return (
         <div>
             {news.title && (
-                <section className={styles.detalhe}>
+                <section className={styles.detalhe }>
                     
                     <div>
                         <h3>Veja a noticia: {news.title}</h3>
