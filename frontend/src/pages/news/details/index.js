@@ -56,7 +56,7 @@ function NewsDetails() {
                             })
 
                         ) : (
-                            <p>Não há imagens disponiveis para esse cachorro</p>
+                            <p>Não há imagens disponiveis para essa noticía</p>
                         )}
                     </div>
                     <div dangerouslySetInnerHTML={{ __html: news.article }} />
