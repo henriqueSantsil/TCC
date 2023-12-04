@@ -3,5 +3,5 @@
 import axios from "axios"
 
 export default axios.create({
-    baseURL: 'http://localhost:5817'
+    baseURL: 'https://tcc-pi-liard.vercel.app/'
 })
