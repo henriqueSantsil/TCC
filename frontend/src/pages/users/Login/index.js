@@ -29,26 +29,26 @@ function Login() {
 
 
   return (<>
-    <section class="text-center text-lg-start rounded-start-2">
-      <div class={styles.backgroundImage}>
+    <section className={styles.backgroundImage}>
+      <div>
 
-        <div class="container py-4 mt-5 ">
-          <div class="row g-0 align-items-center">
-            <div class="w-50 mb-5 mb-lg-0">
-              <div class="card cascading-right " style={{ background: 'hsla(0, 0%, 100%, 0.55);', backdropfilter: 'blur(30px);', margin: '10px,10px,auto' }}>
-                <div class="card-body m-5 p-6 shadow-5 text-center">
-                  <h2 class="fw-bold mb-5">Realize seu login!</h2>
+        <div className="container py-4 mt-5 ">
+          <div className="row g-0 align-items-center">
+            <div className={styles.seila}>
+              <div className="card cascading-right " style={{ background: 'hsla(0, 0%, 100%, 0.55);', backdropfilter: 'blur(30px);' }}>
+                <div className="card-body m-5 p-6 shadow-5 text-center">
+                  <h2 className="fw-bold mb-5">Realize seu login!</h2>
                   <form onSubmit={handleSubmit}>
 
-                    <div class="row">
+                    <div className="row">
 
-                      <div class=" mb-4">
-                        <div class="form-outline">
-                          <label class="form-label" for="email">Digite seu e-mail</label>
+                      <div className=" mb-4">
+                        <div className="form-outline">
+                          <label className="form-label" for="email">Digite seu e-mail</label>
                           <InputGroup
-                            label={<i class="zmdi zmdi-email"></i>}
+                            label={<i className="zmdi zmdi-email"></i>}
                             type='email'
-                            placeholder='exemplo@hotmail.com'
+                            placeholder='exemplo@exemplo.com'
                             name='email'
                             handleChange={handleChange}
                           />
@@ -56,11 +56,11 @@ function Login() {
                       </div>
 
                     </div>
-                    <div class="row">
-                      <div class="form-outline  mb-4">
-                        <label class="form-label" for="form3Example4">Digite sua senha</label>
+                    <div className="row">
+                      <div className="form-outline  mb-4">
+                        <label className="form-label" for="form3Example4">Digite sua senha</label>
                         <InputGroup
-                          label={<i class="zmdi zmdi-key"></i>}
+                          label={<i className="zmdi zmdi-key"></i>}
                           type='password'
                           placeholder='xxxxxx'
                           name='password'
