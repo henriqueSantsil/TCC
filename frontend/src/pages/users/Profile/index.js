@@ -116,7 +116,7 @@ function Profile() {
             </div>
     
             {/* News block */}
-            <h3>Your Posted News:</h3>
+            <h3>Suas notícias:</h3>
             <div className={styles.newsBlock}>
                 
     

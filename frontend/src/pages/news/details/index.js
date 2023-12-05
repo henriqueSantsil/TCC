@@ -56,17 +56,24 @@ function NewsDetails() {
                             })
 
                         ) : (
-                            <p>Não há imagens disponiveis para essa noticía</p>
+                            <p>Não há imagens disponiveis para essa notícia</p>
                         )}
                     </div>
                     <div dangerouslySetInnerHTML={{ __html: news.article }} />
 
-                    {token ? (
-                        <strong>{formattedDate}</strong>
-                    ) : (
-                        <p>
-                            Você precisa <Link to='/register'>Criar uma conta</Link> para solicitar a visita
-                        </p>
+                    {token ? (<>
+                                por <strong>{news.author}</strong>, publicado em <strong>{formattedDate}</strong>
+                                
+                             </>
+
+                    ) : (<>
+                            <p>
+                                por <strong>{news.author}</strong>, publicado em <strong>{formattedDate}</strong> 
+                            </p>
+                            <p> Você pode <Link to='/register'>Criar uma conta</Link> para cadastrar uma notícia!</p>
+                            
+                        </>
+                        
                     )}
                     <div>
                         <button onClick={() => setFontSize('normal')}>A-</button>

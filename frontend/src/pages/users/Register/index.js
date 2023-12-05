@@ -120,8 +120,7 @@ function Register() {
             </div>
             </div>
 
-            <button className='btn btn-success'>Registrar
-        </button>
+            <button className='btn btn-success'>Registrar</button>
         <ToastContainer />
 
         <p>

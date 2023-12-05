@@ -15,10 +15,24 @@ const News = db.define('News', {
     article:{
         type: DataTypes.TEXT,
         allowNull: false
+    },
+    author :{
+        type: DataTypes.STRING,
+        allowNull: false
     }
 })
 
 News.belongsTo(User)
 User.hasMany(News)
+
+News.addHook('beforeValidate', async (news, options) => {
+    // Fetch the corresponding user
+    const user = await User.findByPk(news.UserId);
+
+    // If user is found, set the author field in news
+    if (user) {
+        news.author = user.name;
+    }
+});
 
 module.exports = News

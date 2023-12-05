@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import InputGroup from '../../../components/InputGroup'
 import api from '../../../utils/api'
+import { useNavigate } from 'react-router-dom'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import InputGroupCKEditor from '../../../components/InputGroupCkEditor';
@@ -11,6 +12,8 @@ function AddNews() {
     const [news, setNews] = useState({})
     const [preview, setPreview] = useState()
     const [token] = useState(localStorage.getItem('token' || ''))
+
+    const navigate = useNavigate()
 
     function handleChange(e) {
         setNews({ ...news, [e.target.name]: e.target.value })
@@ -46,6 +49,7 @@ function AddNews() {
             const notify = () => toast.success("Noticia cadastrada com sucesso!", {
                 theme: "dark"
             });
+            navigate('/')
             notify()
             return response.data
         }).catch((err) => {
@@ -72,7 +76,7 @@ function AddNews() {
                             src={preview ||
                                 (news.image
                                     ? 'http://localhost:5000/images/news/' + news.image
-                                    : 'https://i.pinimg.com/originals/a0/4d/84/a04d849cf591c2f980548b982f461401.jpg') // Your placeholder image URL
+                                    : 'https://imgs.search.brave.com/z3Rkncq4le9dXD4ml_g86LWSNHMo3vSIx58WpRNWJUI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvOTMx/NjQzMTUwL3ZlY3Rv/ci9waWN0dXJlLWlj/b24uanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPVN0LWdwUm41/OGVJYThFREFIcG5f/eU80Q1paQW5HRDZ3/S3BsbjlsM1ozT2s9') // Your placeholder image URL
                             }
                             alt='Click to change profile picture' />
                     </label>
